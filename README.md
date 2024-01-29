@@ -1,0 +1,1 @@
+Storage account endpoint: https://stgsandfrontendne97.z16.web.core.windows.net/
