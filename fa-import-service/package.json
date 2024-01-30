@@ -8,13 +8,11 @@
     "prestart": "npm run build",
     "start": "func start",
     "test": "echo \"No tests yet...\"",
-    "publish-function": "func azure functionapp publish fa-products-service-ne-98",
-    "publish-import-functions": "func azure functionapp publish fa-import-service-ne-97",
-    "publish-function-slot-2": "func azure functionapp publish fa-products-service-ne-98 --slot='slot-2'"
+    "publish-import-functions": "func azure functionapp publish fa-import-service-ne-97 --typescript"
   },
   "dependencies": {
-    "@azure/app-configuration": "^1.5.0",
-    "@azure/cosmos": "^4.0.0"
+    "@azure/storage-blob": "^12.17.0",
+    "papaparse": "^5.4.1"
   },
   "devDependencies": {
     "@azure/functions": "^3.0.0",

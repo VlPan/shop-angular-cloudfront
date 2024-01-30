@@ -1,22 +1,2 @@
 <app-header></app-header>
-<div class="container py-3 py-md-5">
-<h1>This data is requested from cloud</h1>
-<p>Product by id: {{product$ | async | json}}</p>
-<p>Products: {{products$ | async | json}}</p>
-<!-- <p>Data from app config: {{appConfigData$ | async }}</p> -->
-<p>TOTAL PRODUCTS: {{totalProducts$ | async }}</p>
- 
-  <!-- <router-outlet></router-outlet> -->
-
-  Create product:
-
-  <form [formGroup]="productForm">
-    <label for="title">Product Title: </label>
-    <input id="title" type="text" [formControl]="productTitle">
-
-    <label for="price">Product Price: </label>
-    <input id="price" type="number" [formControl]="productPrice">
-
-    <button [disabled]="productForm.invalid" (click)="createProduct()">Create Product</button>
-  </form>
-</div>
+<router-outlet></router-outlet>
