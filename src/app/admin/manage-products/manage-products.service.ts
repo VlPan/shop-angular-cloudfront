@@ -18,21 +18,34 @@ export class ManageProductsService extends ApiService {
     }
 
     return this.getPreSignedUrl(file.name).pipe(
-      switchMap((url) =>
-        this.http.put(url, file, {
+      switchMap(({ sasToken }) => {
+        console.log('getPreSignedUrl', sasToken)
+        return this.http.put(sasToken, file, {
           headers: {
             // eslint-disable-next-line @typescript-eslint/naming-convention
+            'Ocp-Apim-Subscription-Key': this.getSecret('Ocp-Apim-Subscription-Key'),
+            // eslint-disable-next-line @typescript-eslint/naming-convention
             'Content-Type': 'text/csv',
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            "x-ms-blob-type": "BlockBlob"
           },
         })
+      }
+        
       )
     );
   }
 
-  private getPreSignedUrl(fileName: string): Observable<string> {
+  private getPreSignedUrl(fileName: string): Observable<any> {
     const url = this.getUrl('import', 'import');
 
+    console.log('%c --->  url', 'color: #de4209', url);
+
     return this.http.get<string>(url, {
+      headers: {
+           // eslint-disable-next-line @typescript-eslint/naming-convention
+          'Ocp-Apim-Subscription-Key': this.getSecret('Ocp-Apim-Subscription-Key'),
+      },
       params: {
         name: fileName,
       },
