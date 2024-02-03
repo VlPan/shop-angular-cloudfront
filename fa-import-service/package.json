@@ -11,6 +11,7 @@
     "publish-import-functions": "func azure functionapp publish fa-import-service-ne-97 --typescript"
   },
   "dependencies": {
+    "@azure/service-bus": "^7.9.3",
     "@azure/storage-blob": "^12.17.0",
     "papaparse": "^5.4.1"
   },

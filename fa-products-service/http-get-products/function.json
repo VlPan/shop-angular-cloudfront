@@ -4,6 +4,8 @@
       "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",
+      "topicName": "service-bus-topic-sand-ne-97",
+      "subscriptionName": "servicebus-subscription-sand-97",
       "name": "req",
       "route": "products",
       "methods": [
