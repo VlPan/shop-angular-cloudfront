@@ -594,3 +594,44 @@ resource "azurerm_windows_function_app" "import_service" {
     ]
   }
 }
+
+resource "azurerm_resource_group" "service_bus_rg" {
+  name     = "rg-service-bus-sand-ne-97"
+  location = "northeurope"
+}
+
+resource "azurerm_servicebus_namespace" "service_bus_namespace" {
+  name                          = "service-bus-sand-ne-97"
+  location                      = azurerm_resource_group.service_bus_rg.location
+  resource_group_name           = azurerm_resource_group.service_bus_rg.name
+  sku                           = "Standard"
+  capacity                      = 0
+  zone_redundant                = false
+}
+
+resource "azurerm_servicebus_queue" "servicebus_queue" {
+  name                                    = "servicebus-queue-sand-ne-97"
+  namespace_id                            = azurerm_servicebus_namespace.service_bus_namespace.id
+  status                                  = "Active" 
+  enable_partitioning                     = true 
+  lock_duration                           = "PT1M" 
+  max_size_in_megabytes                   = 1024
+  max_delivery_count                      = 10 
+  requires_duplicate_detection            = false
+  duplicate_detection_history_time_window = "PT10M"
+  requires_session                        = false
+  dead_lettering_on_message_expiration    = false
+}
+
+
+resource "azurerm_servicebus_topic" "servicebus_topic" {
+  name                = "service-bus-topic-sand-ne-97"
+  namespace_id        = azurerm_servicebus_namespace.service_bus_namespace.id
+  enable_partitioning = true
+}
+
+resource "azurerm_servicebus_subscription" "servicebus_subscription" {
+  name               = "servicebus-subscription-sand-97"
+  topic_id           = azurerm_servicebus_topic.servicebus_topic.id
+  max_delivery_count = 1
+}

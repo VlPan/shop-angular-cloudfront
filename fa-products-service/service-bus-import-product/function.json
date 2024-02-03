@@ -1,0 +1,13 @@
+{
+  "bindings": [
+    {
+      "name": "serviceBusItem",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "topicName": "service-bus-topic-sand-ne-97",
+      "subscriptionName": "servicebus-subscription-sand-97",
+      "connection": "MyServiceBus"
+    }
+  ],
+  "scriptFile": "../dist/service-bus-import-product/index.js"
+}
